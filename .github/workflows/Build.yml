@@ -1,0 +1,46 @@
+name: LibraryBuild
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build_Linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Configure formatter_lib
+        run: cmake ${{github.workspace}}/formatter_lib/ -B ${{github.workspace}}/formatter_lib/build
+
+      - name: Build formatter_lib
+        run: cmake --build ${{github.workspace}}/formatter_lib/build
+
+      - name: Configure formatter_ex_lib
+        run: cmake ${{github.workspace}}/formatter_ex_lib/ -B ${{github.workspace}}/formatter_ex_lib/build
+
+      - name: Build formatter_ex_lib
+        run: cmake --build ${{github.workspace}}/formatter_ex_lib/build
+        
+      - name: Configure solver_lib
+        run: cmake ${{github.workspace}}/solver_lib/ -B ${{github.workspace}}/solver_lib/build
+
+      - name: Build solver_lib
+        run: cmake --build ${{github.workspace}}/solver_lib/build
+
+      - name: Configure solver
+        run: cmake ${{github.workspace}}/solver/ -B ${{github.workspace}}/solver/build
+
+
+      - name: Build solver
+        run: cmake --build ${{github.workspace}}/solver/build
+
+      - name: Configure Hello_World
+        run: cmake ${{github.workspace}}/hello_world_app/ -B ${{github.workspace}}/hello_world_app/build
+
+      - name: Build Hello_World
+        run: cmake --build ${{github.workspace}}/hello_world_app/build
