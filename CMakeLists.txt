@@ -17,3 +17,9 @@ ${CMAKE_CURRENT_SOURCE_DIR}/solver_lib/src
 )
 
 target_link_libraries(solver formatter_ex_lib formatter_lib solver_lib)
+
+install(TARGETS solver
+    RUNTIME DESTINATION bin
+)
+
+include(CPack.cmake)
