@@ -4,9 +4,7 @@ project(solver)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib formatter_ex_lib_dir)
-
 add_library(solver_lib ${CMAKE_CURRENT_SOURCE_DIR}/solver_lib/d/solver.cpp)
 add_executable(solver ${CMAKE_CURRENT_SOURCE_DIR}/solver/d/equation.cpp)
 target_include_directories(formatter_ex_lib PUBLIC
