@@ -4,7 +4,7 @@ name: WinMac
 on:
  push:
    tags:
-     - vwm**  
+     - r**  
   
 jobs: 
   
