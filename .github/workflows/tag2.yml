@@ -1,9 +1,10 @@
+
 name: WinMac
 
 on:
  push:
    tags:
-     - v**  
+     - vwm**  
   
   Make_GitHub_Release:
     name   : Create Release
