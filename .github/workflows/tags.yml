@@ -93,7 +93,7 @@ jobs:
         run : |
           cmake --version
       - name: Build binary files
-        run : |git
+        run : |
           mkdir cmake && cd cmake
           cmake -DGENERATOR=BIN ..
           make
