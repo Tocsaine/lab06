@@ -8,26 +8,6 @@ on:
 
 jobs: 
 
-  Make_GitHub_Release:
-    name   : Create Release
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-                        
-    - name: Release
-      id  : create_release
-      uses: actions/create-release@v1
-      env :
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Upload archive and binary files for uploading
-          draft: false
-          prerelease: false
-
   build_packages_Linux:
 
     runs-on: ubuntu-latest
@@ -52,6 +32,28 @@ jobs:
       with:
         artifacts: "build/*.deb,build/*.tar.gz,build/*.zip,build/*.rpm"
         token: ${{ secrets.TOKEN }}
+        
+  Make_GitHub_Release:
+    name   : Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+                        
+    - name: Release
+      id  : create_release
+      uses: actions/create-release@v1
+      env :
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Upload archive and binary files for uploading
+          draft: false
+          prerelease: false
+
+
 
   Windows_Binary:
     needs: Make_GitHub_Release
@@ -91,7 +93,7 @@ jobs:
         run : |
           cmake --version
       - name: Build binary files
-        run : |
+        run : |git
           mkdir cmake && cd cmake
           cmake -DGENERATOR=BIN ..
           make
